@@ -7,8 +7,11 @@ if (!token) throw new Error("Missing BOT_TOKEN");
 
 // const bot = new Bot(token);
 const telegram = new Telegram(token);
-
+console.debug("Bot started");
 async function sendTodayNotification(tatort: Show) {
+  console.debug("Send Tatort Notification for today");
+  console.debug("tatort:");
+  console.debug(JSON.stringify(tatort));
   await telegram.sendMessage({
     chat_id: Deno.env.get("CHAT_ID") as string,
     parse_mode: "Markdown",
@@ -24,7 +27,7 @@ ${tatort.url}
 
 cron("0 0 11 * * *", async function () {
   const tatort = await getNextSundayTatort();
-
+  console.debug("run the daily check.");
   // We assume prime is around 20
   if (tatort && tatort.time.getHours() === 20) {
     await sendTodayNotification(tatort);
@@ -32,6 +35,7 @@ cron("0 0 11 * * *", async function () {
 
   // If no tatort but we are sunday we notify
   if (!tatort && new Date().getDay() === 0) {
+    console.debug("Send Tatort Notification no tatort today");
     await telegram.sendMessage({
       chat_id: Deno.env.get("CHAT_ID") as string,
       parse_mode: "Markdown",
