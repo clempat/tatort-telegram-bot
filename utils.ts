@@ -1,5 +1,6 @@
 export function getNextWeekDayDate(day: number): Date {
   const ret = new Date();
+  if (ret.getDay() === day) return ret;
   ret.setDate(ret.getDate() + ((day - 1 - ret.getDay() + 7) % 7) + 1);
   return ret;
 }

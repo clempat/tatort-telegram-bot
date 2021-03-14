@@ -25,7 +25,7 @@ ${tatort.url}
   });
 }
 
-cron("0 0 11 * * *", async function () {
+cron("0 0 10 * * *", async function () {
   const tatort = await getNextSundayTatort();
   console.debug("run the daily check.");
   // We assume prime is around 20
