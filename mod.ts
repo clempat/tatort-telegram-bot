@@ -29,7 +29,7 @@ cron("0 0 10 * * *", async function () {
   const tatort = await getNextSundayTatort();
   console.debug("run the daily check.");
   // We assume prime is around 20
-  if (tatort && tatort.time.getHours() === 20) {
+  if (tatort && isToday(tatort.time) && tatort.time.getHours() === 20) {
     await sendTodayNotification(tatort);
   }
 

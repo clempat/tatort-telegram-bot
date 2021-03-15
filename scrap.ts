@@ -22,7 +22,7 @@ export async function getNextSundayTatort() {
     return {
       time: showHours
         ? new Date(
-            new Date(nextSunday).setHours(showHours[0], showHours[1], 0, 0)
+            new Date(nextSunday.getTime()).setHours(showHours[0], showHours[1], 0, 0)
           )
         : undefined,
       name: clean($(this).find(".headline").text()),
@@ -35,7 +35,7 @@ export async function getNextSundayTatort() {
   });
   return (shows.get() as Array<Show>).find(function isTatort({
     name,
-  }): boolean {
+  }: Show): boolean {
     return name === "Tatort";
   });
 }
