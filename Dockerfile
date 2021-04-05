@@ -1,5 +1,9 @@
 FROM hayd/alpine-deno:1.8.0
 
+RUN apk add tzdata
+RUN echo "Europe/Berlin" > /etc/timezone
+RUN cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
 WORKDIR /app
 
 # Prefer not to run as root.

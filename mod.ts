@@ -1,4 +1,4 @@
-import { getNextSundayTatort, Show } from "./scrap.ts";
+import { getTodayTatort, Show } from "./scrap.ts";
 import { isToday } from "./utils.ts";
 import { cron, Telegram } from "./deps.ts";
 
@@ -25,8 +25,8 @@ ${tatort.url}
   });
 }
 
-cron("0 0 10 * * *", async function () {
-  const tatort = await getNextSundayTatort();
+async function run() {
+  const tatort = await getTodayTatort();
   console.debug("run the daily check.");
   // We assume prime is around 20
   if (tatort && isToday(tatort.time) && tatort.time.getHours() === 20) {
@@ -42,4 +42,6 @@ cron("0 0 10 * * *", async function () {
       text: "🚫 Keine Tatort heute.",
     });
   }
-});
+}
+
+cron("0 0 11 * * *", run);
