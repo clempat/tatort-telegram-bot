@@ -39,7 +39,7 @@ async function run() {
     await telegram.sendMessage({
       chat_id: Deno.env.get("CHAT_ID") as string,
       parse_mode: "Markdown",
-      text: "🚫 Keine Tatort heute.",
+      text: "🚫 Kein Tatort heute.",
     });
   }
 }
