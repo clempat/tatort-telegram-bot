@@ -1,5 +1,5 @@
 import { clean, extractHours, getNextWeekDayDate } from "./utils.ts";
-import { cheerio, Cheerio } from "./deps.ts";
+import * as cheerio from "https://esm.sh/cheerio";
 
 export interface Show {
   time: Date;
